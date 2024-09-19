@@ -8,6 +8,7 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { TestGlobal } from './globals/testGlobal'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -20,6 +21,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media],
+  globals: [TestGlobal],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -30,6 +32,11 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
+  localization: {
+    defaultLocale: 'en',
+    locales: ['en', 'de'],
+    fallback: true,
+  },
   sharp,
   plugins: [
     // storage-adapter-placeholder
